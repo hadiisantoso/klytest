@@ -49,39 +49,36 @@
                 </div>
             @endif
 
-            <form class="form-horizontal" method="POST" action="{{ route('data.store') }}">
+            <form class="form-horizontal">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="inputName">Name</label>
-                    <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter Name" value={{ old('name') }}>
+                    <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter Name" value={{$data->name}}>
                 </div>
                 <div class="form-group">
                     <label for="inputeEmail">Email address</label>
-                    <input type="email" class="form-control" id="inputeEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" value={{ old('email') }}>
+                    <input type="email" class="form-control" id="inputeEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email" value={{$data->email}}>
                 </div>
                 <div class="form-group">
                     <label for="brithdate">Birth Date</label>
-                    <input class="form-control" id="birthdate" name="birth_date" autocomplete="off" value={{ old('birth_date') }}>
+                    <input class="form-control" id="birthdate" name="birth_date" autocomplete="off" value={{$data->birth_date}}>
                 </div>
                 <div class="form-group">
                     <label for="inputPhoneNumber">Phone Number</label>
-                    <input type="text" class="form-control" id="inputPhoneNumber" name="phone_number" placeholder="Enter Phone Number" value={{ old('phone_number') }}>
+                    <input type="text" class="form-control" id="inputPhoneNumber" name="phone_number" placeholder="Enter Phone Number" value={{$data->phone_number}}>
                 </div>
                 <div class="form-group">
                 <label for="sel1">Gender</label>
                 <select class="form-control" id="sel1" name="gender">
                 @foreach($genders as $gender)
-                    <option value="{{ $gender['key'] }}" @if(old('gender') == $gender['key']) selected @endif> {{ $gender['value'] }} </option>
+                    <option value="{{ $gender['key'] }}" @if($data->gender == $gender['key']) selected @endif> {{ $gender['value'] }} </option>
                 @endforeach
                 </select>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" name="address" placeholder="Enter Address" value={{ old('address') }}>
+                    <input type="text" class="form-control" id="inputAddress" name="address" placeholder="Enter Address" value={{ $data->address}}>
                 </div>
-
-                <button type="reset" class="btn btn-light" id="reset">Reset</button>
-                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                 
             </form>
             </div>

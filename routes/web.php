@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/','DataController@index');
+
+Route::resource('data', 'DataController');
+
+View::composer(
+    ['index','data-view'],
+    'App\Http\View\Composers\GenderComposer'
+);
