@@ -13,7 +13,7 @@ class DataController extends Controller
      */
     public function index()
     {
-        $dir    = '../storage/app/public/';
+        $dir    = base_path().'/storage/app/public/';
         $files = scandir($dir, 1);
         $dataall = array();
         for($i=0;$i<sizeof($files);$i++){
@@ -42,7 +42,6 @@ class DataController extends Controller
      */
     public function store(Request $req)
     { 
-     
         // dd($req->all());
         $req->validate([
             'name' => 'required',
@@ -61,10 +60,11 @@ class DataController extends Controller
             $req->address
         );
         $fileName = $req->name.'-'.date("dmYHis");
-        $file=fopen('../storage/app/public/'.$fileName.'.txt','w');
+        $dir    = base_path().'/storage/app/public/';
+        $file=fopen($dir.$fileName.'.txt','w');
         fputcsv($file,$data);
         fclose($file);
-        return redirect()->back()->with('message', 'Terima kasih telas mengisi form');
+        return redirect()->route('data.index')->with('message', 'Terima kasih telas mengisi form');
     }
 
     /**
@@ -75,7 +75,8 @@ class DataController extends Controller
      */
     public function show($id)
     {
-        $file=fopen('../storage/app/public/'.$id,'r');
+        $dir = base_path().'/storage/app/public/'.$id;
+        $file=fopen($dir,'r');
         $dataCsv = (fgetcsv($file));
         $data = new \stdClass();
         $data->name = $dataCsv[0];
@@ -96,7 +97,8 @@ class DataController extends Controller
      */
     public function edit($id)
     {
-        $dir = '../storage/app/public/'.$id;
+        
+        $dir = base_path().'/storage/app/public/'.$id;
         $file=fopen($dir,'r');
         $dataCsv = (fgetcsv($file));
         $data = new \stdClass();
@@ -120,7 +122,6 @@ class DataController extends Controller
     public function update(Request $req, $id)
     {
         $req->validate([
-            'name' => 'required',
             'email' => 'required',
             'birth_date' => 'required',
             'phone_number' => 'required|numeric',
@@ -135,10 +136,11 @@ class DataController extends Controller
             $req->gender,
             $req->address
         );
-        $file=fopen('../storage/app/public/'.$id,'w');
+        $dir = base_path().'/storage/app/public/'.$id;
+        $file=fopen($dir,'w');
         fputcsv($file,$data);
         fclose($file);
-        return redirect()->back()->with('message', 'Data berhasil diupdate');
+        return redirect()->route('data.index')->with('message', 'Data berhasil diupdate');
     }
 
     /**
@@ -149,7 +151,7 @@ class DataController extends Controller
      */
     public function destroy($id)
     {
-        $file='../storage/app/public/'.$id;
+        $file = base_path().'/storage/app/public/'.$id;
         if (!unlink($file))
         {
             echo ("Error deleting $file");
@@ -158,6 +160,6 @@ class DataController extends Controller
         {
             echo ("Deleted $file");
         }
-        return redirect()->route('data.index');
+        return redirect()->route('data.index')->with('message', 'Data berhasil didelete');
     }
 }

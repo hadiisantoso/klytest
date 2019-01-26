@@ -17,7 +17,7 @@ Route::resource('data', 'DataController');
 
 
 View::composer(
-    ['index','data-view','data-create','data-edit'],
+    ['data-view','data-create','data-edit'],
     'App\Http\View\Composers\GenderComposer'
 );
 

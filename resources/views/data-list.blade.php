@@ -46,6 +46,11 @@
             @if(!empty($successMsg))
                 <div class="alert alert-success"> {{ $successMsg }}</div>
             @endif
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="clearfix">
                 <a class='btn btn-success pull-right' style="margin-left:10px" id="alldata" href={{ route('data.create') }}>ADD</a>
             </div>
