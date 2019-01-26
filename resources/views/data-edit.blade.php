@@ -51,11 +51,12 @@
             <div class="clearfix">
                 <a class='btn btn-primary pull-right' id="alldata" href={{ route('data.index') }}>All Data</a>
             </div>
-            <form class="form-horizontal">
+            <form class="form-horizontal" method="POST" action="{{ route('data.update',$file) }}">
                 {{ csrf_field() }}
+                <input name="_method" type="hidden" value="PATCH">
                 <div class="form-group">
                     <label for="inputName">Name</label>
-                    <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter Name" value={{$data->name}}>
+                    <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter Name" readonly value={{$data->name}}>
                 </div>
                 <div class="form-group">
                     <label for="inputeEmail">Email address</label>
@@ -81,7 +82,8 @@
                     <label for="inputAddress">Address</label>
                     <input type="text" class="form-control" id="inputAddress" name="address" placeholder="Enter Address" value={{ $data->address}}>
                 </div>
-                
+
+                <button type="submit" class="btn btn-primary" id="submit">Update</button>
             </form>
             </div>
         </div>

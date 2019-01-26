@@ -48,7 +48,9 @@
                     {{ session()->get('message') }}
                 </div>
             @endif
-
+            <div class="clearfix">
+                <a class='btn btn-primary pull-right' id="alldata" href={{ route('data.index') }}>All Data</a>
+            </div>
             <form class="form-horizontal" method="POST" action="{{ route('data.store') }}">
                 {{ csrf_field() }}
                 <div class="form-group">
