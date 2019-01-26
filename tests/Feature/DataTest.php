@@ -19,9 +19,9 @@ class DataTest extends TestCase
 
     public function testStoreAction()
     {
-        // $this->markTestSkipped(
-        //     "can't call api because of a bug in there causing our lunch to disappear"
-        // );
+        $this->markTestSkipped(
+            "can't call api because of a bug in there causing our lunch to disappear"
+        );
         Session::start();
         $random = str_random(5);
         $response = $this->call('POST', 'data', array(
@@ -87,9 +87,9 @@ class DataTest extends TestCase
     }
 
     public function testDeleteAction(){
-        $this->markTestSkipped(
-            "can't call api because of a bug in there causing our lunch to disappear"
-        );
+        // $this->markTestSkipped(
+        //     "can't call api because of a bug in there causing our lunch to disappear"
+        // );
         $dir    = base_path().'/storage/app/public/';
         $files = scandir($dir, 1);
         $dataall = array();
